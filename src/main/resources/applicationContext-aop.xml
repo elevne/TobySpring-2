@@ -1,0 +1,22 @@
+<!--출처: http://wiki.gurubee.net/pages/viewpage.action?pageId=26740965-->
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
+       default-autowire="byName">
+    <!-- 비지니스 로직 BO 객체 -->
+    <bean id="messageTarget" class="com.oracleclub.study.aop.target.MessageTarget"></bean>
+    <!-- POJO로 구현된 Advice 빈 설정 -->
+    <bean id="pojoAdvice" class="com.oracleclub.study.aop.advice.PojoAdvice"></bean>
+    <!-- AOP 설정 -->
+    <aop:config>
+        <!-- Aspect(Advice+Pointcut) 설정 -->
+        <aop:aspect ref="pojoAdvice">
+            <aop:before method="commonMessage" pointcut="execution(* com.oracleclub.study.aop.target.MessageTarget.*())"/>
+            <aop:after  method="commonMessage" pointcut="execution(* com.oracleclub.study.aop.target.MessageTarget.mail*())"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

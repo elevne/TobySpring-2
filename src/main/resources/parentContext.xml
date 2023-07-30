@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="hi" class="org.tobyspring.chapter1.Hi" >
+        <property name="person" ref="person" />
+    </bean>
+    <bean id="person" class="org.tobyspring.chapter1.Person">
+        <property name="name" value="Parent" />
+    </bean>
+</beans>
