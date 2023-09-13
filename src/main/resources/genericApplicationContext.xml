@@ -3,10 +3,20 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
-       ">
+       "
+        default-autowire="byName">
     <bean id="hi" class="org.tobyspring.chapter1.Hi">
         <property name="person" ref="person" />
     </bean>
+    <!--  위의 property 방식은 수정자 주입 DI 이다. 이 외에도 constructor-arg 를 사용하여 생성자 주입 DI 를 할 수 있다. -->
+    <bean id="hi2" class="org.tobyspring.chapter1.Hi">
+        <constructor-arg name="person" ref="person" />
+    </bean>
+    <!--  그 다음 방법은 autowiring: Hi 클래스 프로퍼티의 이름과 동일한 빈을 찾아서 자동으로 프로퍼티로 등록해준다
+      이름을 이용한 자동와이어링은 빈의 모든 프로퍼티에 대해 이름이 동일한 빈을 찾아서 연결해준다.
+      bean 태그에 autowire 속성을 추가할 수도, beans 태그에 default-autowire 을 추가해줄 수도 있다.
+      -->
+    <bean id="hi3" class="org.tobyspring.chapter1.Hi" autowire="byType" />
     <bean id="person" class="org.tobyspring.chapter1.Person">
         <property name="name" value="elevne" />
     </bean>

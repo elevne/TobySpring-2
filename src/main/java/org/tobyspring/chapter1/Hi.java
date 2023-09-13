@@ -8,4 +8,8 @@ public class Hi {
 
     public void setPerson(Person person) { this.person = person; }
 
+    Hi(Person person) {
+        this.person = person;
+    }
+
 }
