@@ -8,8 +8,10 @@ public class Hi {
 
     public void setPerson(Person person) { this.person = person; }
 
-    Hi(Person person) {
+    public Hi(Person person) {
         this.person = person;
     }
+
+    public Hi() {}
 
 }

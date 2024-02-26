@@ -30,12 +30,10 @@ public class Chapter1Test {
     public void staticApplicationContextTest() {
         // StaticApplicationContext 는 코드에 의해 설정 메타정보를 등록하는 기능을 제공하는 애플리케이션 컨텍스트이다.
         StaticApplicationContext applicationContext = new StaticApplicationContext();
-
         // BeanDefinition 은 스프링의 설정 메타정보를 표현하는 추상 정보이다.
         BeanDefinition personDef = new RootBeanDefinition(Person.class);
         personDef.getPropertyValues().addPropertyValue("name", "Wonil");
         applicationContext.registerBeanDefinition("person", personDef);
-
         BeanDefinition hiDef = new RootBeanDefinition(Hi.class);
         hiDef.getPropertyValues().addPropertyValue("person", new RuntimeBeanReference("person"));
         applicationContext.registerBeanDefinition("hi", hiDef);
