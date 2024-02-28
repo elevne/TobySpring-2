@@ -1,19 +1,27 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.context.support.StaticApplicationContext;
+import org.springframework.stereotype.Component;
+import org.tobyspring.chapter1.AnnotatedHiConfig;
 import org.tobyspring.chapter1.Hi;
 import org.tobyspring.chapter1.Person;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.HashSet;
+import java.util.Set;
 
+import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 public class Chapter1Test {
@@ -70,6 +78,14 @@ public class Chapter1Test {
         Hi hi = child.getBean("hi2", Hi.class);
         hi.print();
         assertEquals("'Hi, Parent' was expected", "Hi, Parent", outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void annotatedHiTest() {
+        // Annotation Config
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(AnnotatedHiConfig.class);
+        Hi hi = ctx.getBean("hi", Hi.class);
+        assertNotNull(hi);
     }
 
 }
